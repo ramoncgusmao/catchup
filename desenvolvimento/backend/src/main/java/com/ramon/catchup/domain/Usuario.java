@@ -1,7 +1,9 @@
 package com.ramon.catchup.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +55,7 @@ public class Usuario {
 	private  Filial filial;
 	
 	@ManyToMany(mappedBy = "curtidas")
-	private List<Post> curtidos = new ArrayList<Post>();
+	private Set<Post> curtidos = new HashSet<Post>();
 	
 	
 	

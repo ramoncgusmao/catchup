@@ -1,6 +1,7 @@
 package com.ramon.catchup.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ramon.catchup.domain.Post;
+import com.ramon.catchup.domain.Usuario;
+import com.ramon.catchup.exception.RegraNegocioException;
 import com.ramon.catchup.repository.PostRepository;
 
 @Service
@@ -37,11 +40,31 @@ public class PostService {
 
 
 	public void curtir(Integer idPost) {
+		Post post = findPost(idPost);
+		Usuario usuario = usuarioService.findById(1);
 		
-		post.setUsuario(usuarioService.findById(1));
+		if(post.getCurtidas().contains(usuario)) {
+			post.getCurtidas().remove(usuario);
+		}else {
+			post.getCurtidas().add(usuario);
+		}
+	
+		repository.save(post);
 	}
 	
-	
+	public Post findPost(Integer idPost) {
+		if(idPost == null) {
+			throw new RegraNegocioException("não existe id");
+		}
+		
+		Optional<Post> post = repository.findById(idPost);
+		
+		if(post.isPresent()) {
+			return post.get();
+		}
+		
+		throw new RegraNegocioException("não existe post com esse id");
+	}
 	
 
 }

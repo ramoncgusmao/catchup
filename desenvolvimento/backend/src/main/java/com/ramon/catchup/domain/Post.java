@@ -2,7 +2,9 @@ package com.ramon.catchup.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,11 +60,14 @@ public class Post {
 			joinColumns = @JoinColumn(name = "id_post"), 
 			inverseJoinColumns = @JoinColumn(name = "id_usuario")
 	)
-	private List<Usuario> curtidas = new ArrayList<Usuario>();
+	private Set<Usuario> curtidas = new HashSet<Usuario>();
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
 	
+	public Integer quantidadeCurtidas() {
+		return curtidas.size();
+	}
 }

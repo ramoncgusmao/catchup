@@ -3,11 +3,13 @@ package com.ramon.catchup.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ramon.catchup.domain.Empresa;
 import com.ramon.catchup.exception.RegraNegocioException;
 import com.ramon.catchup.repository.EmpresaRepository;
 
+@Service
 public class EmpresaService {
 
 	@Autowired

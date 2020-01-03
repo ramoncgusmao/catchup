@@ -10,6 +10,6 @@ public interface ParceriaRepository extends JpaRepository<Parceria, Integer> {
 
 	List<Parceria> findByStatusOrderByIdDesc(boolean status);
 
-	List<Parceria> findByStatusAndByCategoriaIdOrderByIdDesc(boolean status, Integer categoriaId);
+	List<Parceria> findByStatusAndCategoria_IdOrderByIdDesc(boolean status, Integer categoriaId);
 
 }
