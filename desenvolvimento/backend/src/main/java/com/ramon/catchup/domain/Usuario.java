@@ -46,7 +46,7 @@ public class Usuario {
 	@Column(length = 50, name = "senha")
 	private String senha;
 	
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Perfil perfil;
 
 	@JsonIgnore
