@@ -2,8 +2,8 @@ package com.ramon.catchup.domain;
 
 public enum Perfil {
 
-	ADMIN(1, "ADMINISTRADOR"),
-	COLABORADOR(2, "COLABORADOR");
+	ADMIN(1, "ROLE_ADMIN"),
+	COLABORADOR(2, "ROLE_COLABORADOR");
 
 	
 	private int cod;

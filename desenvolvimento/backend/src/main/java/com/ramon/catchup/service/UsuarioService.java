@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ramon.catchup.domain.Filial;
@@ -23,10 +23,13 @@ public class UsuarioService {
 	@Autowired
 	private FilialService filialService;
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Transient
 	public Usuario save(Usuario usuario) {
 		
+		usuario.setCpf(pe.encode(usuario.getCpf()));
 		Filial filial = filialService.findByName(usuario.getFilial().getNome());
 		usuario.setFilial(filial);
 		
@@ -45,7 +48,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario autenticar(String cpf, String senha) throws DataIntegrityException {
-		Optional<Usuario> usuarioOpt = repository.findByCpfAndSenha(cpf, senha);
+		Optional<Usuario> usuarioOpt = repository.findByCpfAndSenha(cpf, pe.encode(senha));
 		if(usuarioOpt.isPresent()) {
 			return usuarioOpt.get();
 		}else {

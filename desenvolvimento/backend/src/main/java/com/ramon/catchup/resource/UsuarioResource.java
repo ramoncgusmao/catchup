@@ -6,6 +6,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity criarUsuario(@RequestBody @Valid UsuarioDto dto) {
 		
@@ -38,6 +40,7 @@ public class UsuarioResource {
 	
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity buscarUsuario(@PathVariable("id") Integer id) {
 		
