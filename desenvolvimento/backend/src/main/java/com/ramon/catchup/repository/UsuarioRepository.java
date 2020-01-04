@@ -10,4 +10,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	Optional<Usuario> findByCpfAndSenha(String cpf, String senha);
 
+	Optional<Usuario> findByCpf(String cpf);
+
 }

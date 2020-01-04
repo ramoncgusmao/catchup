@@ -19,6 +19,12 @@ import com.ramon.catchup.domain.dto.AvisoDto;
 import com.ramon.catchup.exception.ErroAoSalvar;
 import com.ramon.catchup.service.AvisoService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.Api;
+
+
 @RestController
 @RequestMapping(value = "/aviso")
 public class AvisoResource {
@@ -26,7 +32,14 @@ public class AvisoResource {
 	@Autowired
 	private AvisoService avisoService;
 	
-	@PostMapping
+	@ApiOperation(value = "Cria um novo Aviso")
+	@ApiResponses(value = {
+	    @ApiResponse(code = 201, message = "Retorna o aviso criado com id"),
+	    @ApiResponse(code = 400, message = "Você não tem permissão para criar um aviso"),
+	    @ApiResponse(code = 403, message = "Você enviou algum dado errado"),
+	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PostMapping( produces="application/json", consumes="application/json")
 	public ResponseEntity criarAviso(@RequestBody @Valid AvisoDto dto) {
 		
 		
@@ -41,8 +54,13 @@ public class AvisoResource {
 		
 	}
 	
-	
-	@GetMapping()
+	@ApiOperation(value = "Retorna o ultimo aviso criado")
+	@ApiResponses(value = {
+	    @ApiResponse(code = 200, message = "Retorna o ultimo aviso criado"),
+	    @ApiResponse(code = 403, message = "Você não tem permissão para visualizar esse recurso"),
+	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@GetMapping(produces="application/json")
 	public ResponseEntity buscarUltimo() {
 		
 		try {
@@ -55,7 +73,14 @@ public class AvisoResource {
 	
 	}
 	
-	@PutMapping("/{id}")
+	@ApiOperation(value = "Edita um aviso pelo seu id")
+	@ApiResponses(value = {
+	    @ApiResponse(code = 200, message = "Retorna o aviso modificado"),
+	    @ApiResponse(code = 403, message = "Você não tem permissão para editar um aviso"),
+	    @ApiResponse(code = 400, message = "Você enviou algum dado errado"),
+	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid AvisoDto dto) {
 		
 		try {
@@ -68,8 +93,15 @@ public class AvisoResource {
 	
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity editar(@PathVariable("id") Integer id) {
+	@ApiOperation(value = "Deleta um aviso pelo seu id")
+	@ApiResponses(value = {
+	    @ApiResponse(code = 200, message = "Retorna uma mensagem informando que a deleção foi bem sucedida"),
+	    @ApiResponse(code = 403, message = "Você não tem permissão para deletar um aviso"),
+	    @ApiResponse(code = 400, message = "Você enviou algum dado errado"),
+	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity deletar(@PathVariable("id") Integer id) {
 		
 		try {
 		

@@ -22,6 +22,8 @@ import com.ramon.catchup.exception.DataIntegrityException;
 import com.ramon.catchup.exception.ErroAoSalvar;
 import com.ramon.catchup.service.CategoriaService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/categoria")
 public class CategoriaResource {
@@ -29,7 +31,8 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 	
-	@PostMapping
+	@ApiOperation(value = "Cria uma nova Categoria")
+	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarCategoria(@RequestBody @Valid CategoriaDto dto) {
 		
 		
@@ -44,8 +47,8 @@ public class CategoriaResource {
 		
 	}
 	
-	
-	@GetMapping()
+	@ApiOperation(value = "Busca todas as Categorias")
+	@GetMapping(produces="application/json")
 	public ResponseEntity buscarCategorias() {
 		
 		try {
@@ -57,8 +60,8 @@ public class CategoriaResource {
 		}
 	
 	}
-	
-	@PutMapping("/{id}")
+	@ApiOperation(value = "Edita uma categoria e retorna ela modificada")
+	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid CategoriaDto dto) {
 		
 		try {
@@ -70,7 +73,7 @@ public class CategoriaResource {
 		}
 	
 	}
-	
+	@ApiOperation(value = "Deleta uma categoria")
 	@DeleteMapping("/{id}")
 	public ResponseEntity deletar(@PathVariable("id") Integer id) {
 		

@@ -24,6 +24,8 @@ import com.ramon.catchup.exception.DataIntegrityException;
 import com.ramon.catchup.exception.ErroAoSalvar;
 import com.ramon.catchup.service.ParceriaService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/parceria")
 public class ParceriaResource {
@@ -31,8 +33,8 @@ public class ParceriaResource {
 	@Autowired
 	private ParceriaService parceriaService;
 	
-	
-	@PostMapping
+	@ApiOperation(value = "Cria uma nova parceria, precisa que a empresa ja tenha sido criada")
+	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarParceria(@RequestBody @Valid ParceriaDto dto) {
 		
 		
@@ -47,8 +49,8 @@ public class ParceriaResource {
 		
 	}
 	
-	
-	@GetMapping()
+	@ApiOperation(value = "Filtra parcerias por status e/ou por categoria")
+	@GetMapping(produces="application/json")
 	public ResponseEntity buscarParcerias(@RequestParam(value = "status", required = false) boolean status, 
 			 @RequestParam(value = "categoria", required = false) Integer categoria) {
 		
@@ -66,7 +68,8 @@ public class ParceriaResource {
 	
 	}
 	
-	@PutMapping("/{id}")
+	@ApiOperation(value = "Edita uma Parceria")
+	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid ParceriaDto dto) {
 		
 		try {
@@ -79,7 +82,8 @@ public class ParceriaResource {
 	
 	}
 	
-	@GetMapping("/{id}/modificarStatus")
+	@ApiOperation(value = "Modifica o status da parceria, se tiver ativa ele desativa e vice e versa")
+	@GetMapping(value = "/{id}/modificarStatus", produces="application/json")
 	public ResponseEntity modificarStatus(@PathVariable("id") Integer id) {
 		
 		try {

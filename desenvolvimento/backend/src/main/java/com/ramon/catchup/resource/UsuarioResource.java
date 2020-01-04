@@ -1,12 +1,10 @@
 package com.ramon.catchup.resource;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +17,16 @@ import com.ramon.catchup.domain.Usuario;
 import com.ramon.catchup.domain.dto.UsuarioDto;
 import com.ramon.catchup.service.UsuarioService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/usuario")
-public class UsuarioResource {
+public class UsuarioResource  {
 
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@ApiOperation(value = "Cria um novo Usuario")
 	@PostMapping
 	public ResponseEntity criarUsuario(@RequestBody @Valid UsuarioDto dto) {
 		
@@ -40,7 +40,7 @@ public class UsuarioResource {
 	
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@ApiOperation(value = "Busca um usuario pelo id")
 	@GetMapping("/{id}")
 	public ResponseEntity buscarUsuario(@PathVariable("id") Integer id) {
 		
@@ -54,6 +54,7 @@ public class UsuarioResource {
 	
 	}
 	
+	@ApiOperation(value = "Cria os dados de um Usuario")
 	@PutMapping("/{id}")
 	public ResponseEntity editarUsuario(@PathVariable("id") Integer id, @RequestBody @Valid UsuarioDto dto) {
 		

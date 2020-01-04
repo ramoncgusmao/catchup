@@ -23,6 +23,8 @@ import com.ramon.catchup.exception.ErroAoSalvar;
 import com.ramon.catchup.exception.RegraNegocioException;
 import com.ramon.catchup.service.EmpresaService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/empresa")
 public class EmpresaResource {
@@ -30,7 +32,8 @@ public class EmpresaResource {
 	@Autowired
 	private EmpresaService empresaService;
 	
-	@PostMapping
+	@ApiOperation(value = "Cria uma nova Empresa")
+	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarEmpresa(@RequestBody @Valid EmpresaDto dto) {
 		
 		
@@ -45,8 +48,8 @@ public class EmpresaResource {
 		
 	}
 	
-	
-	@GetMapping("/{cnjp}")
+	@ApiOperation(value = "Busca uma empresa pelo CNPJ")
+	@GetMapping(value = "/{cnjp}", produces="application/json")
 	public ResponseEntity buscarEmpresas(@PathVariable("cnpj") String cnpj) {
 		
 		try {
@@ -58,8 +61,8 @@ public class EmpresaResource {
 		}
 	
 	}
-	
-	@PutMapping("/{id}")
+	@ApiOperation(value = "Edita uma empresa pelo seu Id")
+	@PutMapping(value = "/{id}", produces="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid EmpresaDto dto) {
 		
 		try {

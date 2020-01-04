@@ -24,6 +24,8 @@ import com.ramon.catchup.exception.DataIntegrityException;
 import com.ramon.catchup.exception.ErroAoSalvar;
 import com.ramon.catchup.service.PostService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/post")
 public class PostResource {
@@ -31,7 +33,8 @@ public class PostResource {
 	@Autowired
 	private PostService postService;
 	
-	@PostMapping
+	@ApiOperation(value = "Cria um novo Post")
+	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarPost(@RequestBody @Valid PostDto dto) {
 		
 		
@@ -46,8 +49,8 @@ public class PostResource {
 		
 	}
 	
-	
-	@GetMapping()
+	@ApiOperation(value = "Busca os Post paginado")
+	@GetMapping(produces="application/json")
 	public ResponseEntity buscarPosts(@RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linePerPage", defaultValue = "10") Integer linePerPage) {
 		
@@ -61,7 +64,8 @@ public class PostResource {
 	
 	}
 	
-	@GetMapping("/{id}")
+	@ApiOperation(value = "Curte ou deixa de curtir um Post")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity curtir(@PathVariable("id") Integer idPost) {
 		
 		try {
