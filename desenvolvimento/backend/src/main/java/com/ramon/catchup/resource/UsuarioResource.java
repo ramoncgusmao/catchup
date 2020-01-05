@@ -67,4 +67,17 @@ public class UsuarioResource  {
 		}
 	
 	}
+	
+	@ApiOperation(value = "Cria um usuario Admin")
+	@GetMapping("/criarUsuarioMasterInicial")
+	public ResponseEntity criarUsuarioMaster() {
+		
+		try {	
+			String usuario = usuarioService.primeiroLogin();
+			return ResponseEntity.ok(usuario);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	
+	}
 }

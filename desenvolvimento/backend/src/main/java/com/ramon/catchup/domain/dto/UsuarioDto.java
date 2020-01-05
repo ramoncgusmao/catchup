@@ -1,5 +1,7 @@
 package com.ramon.catchup.domain.dto;
 
+import java.util.Arrays;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -28,13 +30,18 @@ public class UsuarioDto {
 	 
 	 @NotEmpty(message = "O Cpf é necessario")
 	private String cpf;
+	 
+	 @NotEmpty(message = "O email é necessario")
+	private String email;
 	 public Usuario convertToEntity() {
 		 
-		 return Usuario.builder()
-				 .nome(nome)
-				 .senha(senha)
-				 .perfil(Perfil.toEnum(perfil))
-				 .cpf(cpf)
-				 .filial(Filial.builder().nome(filial).build()).build();	
-		 }
+		Usuario usuario =  new Usuario();
+		usuario.setNome(nome);
+		usuario.setSenha(senha);
+		usuario.setCpf(cpf);
+		usuario.setEmail(email);
+		usuario.setFilial(Filial.builder().nome(filial).build());	
+		usuario.addPerfil(Perfil.toEnum(perfil));
+		return usuario;
+	}
 }

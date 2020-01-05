@@ -8,8 +8,10 @@ import com.ramon.catchup.domain.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	Optional<Usuario> findByCpfAndSenha(String cpf, String senha);
+	Optional<Usuario> findByEmailAndSenha(String email, String senha);
 
 	Optional<Usuario> findByCpf(String cpf);
+	
+	Usuario findByEmail(String email);
 
 }
