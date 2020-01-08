@@ -25,7 +25,7 @@ public class CategoriaService {
 	
 	}
 
-	public List<Categoria> findAll() {// TODO Auto-generated method stub
+	public List<Categoria> findAll() {
 		return repository.findAll();
 	}
 

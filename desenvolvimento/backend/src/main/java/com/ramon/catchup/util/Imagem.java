@@ -34,7 +34,7 @@ public abstract class Imagem {
 
 	  public static BufferedImage decodeToImage(String imageString) {
       BufferedImage image = null;
-      String base64Image = imageString.split(",")[1];
+     
       byte[] imageByte;
       try {
   
