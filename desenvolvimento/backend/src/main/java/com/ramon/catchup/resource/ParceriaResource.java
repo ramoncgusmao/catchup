@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class ParceriaResource {
 	private ParceriaService parceriaService;
 	
 	@ApiOperation(value = "Cria uma nova parceria, precisa que a empresa ja tenha sido criada")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarParceria(@RequestBody @Valid ParceriaDto dto) {
 		
@@ -69,6 +71,7 @@ public class ParceriaResource {
 	}
 	
 	@ApiOperation(value = "Edita uma Parceria")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid ParceriaDto dto) {
 		
@@ -83,6 +86,7 @@ public class ParceriaResource {
 	}
 	
 	@ApiOperation(value = "Modifica o status da parceria, se tiver ativa ele desativa e vice e versa")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping(value = "/{id}/modificarStatus", produces="application/json")
 	public ResponseEntity modificarStatus(@PathVariable("id") Integer id) {
 		

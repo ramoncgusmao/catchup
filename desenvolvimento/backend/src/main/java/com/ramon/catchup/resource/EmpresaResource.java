@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class EmpresaResource {
 	private EmpresaService empresaService;
 	
 	@ApiOperation(value = "Cria uma nova Empresa")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarEmpresa(@RequestBody @Valid EmpresaDto dto) {
 		
@@ -49,6 +51,7 @@ public class EmpresaResource {
 	}
 	
 	@ApiOperation(value = "Busca uma empresa pelo CNPJ")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping(value = "/{cnjp}", produces="application/json")
 	public ResponseEntity buscarEmpresas(@PathVariable("cnpj") String cnpj) {
 		
@@ -62,6 +65,7 @@ public class EmpresaResource {
 	
 	}
 	@ApiOperation(value = "Edita uma empresa pelo seu Id")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}", produces="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid EmpresaDto dto) {
 		

@@ -31,4 +31,8 @@ public class ConvertDate {
               localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
       return calendar.getTime();
   }
+  
+  public static Date localDateNow() {
+	  return localDateToDate(LocalDate.now());
+  }
 }

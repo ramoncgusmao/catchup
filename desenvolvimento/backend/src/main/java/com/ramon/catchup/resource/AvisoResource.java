@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class AvisoResource {
 	    @ApiResponse(code = 403, message = "Você enviou algum dado errado"),
 	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping( produces="application/json", consumes="application/json")
 	public ResponseEntity criarAviso(@RequestBody @Valid AvisoDto dto) {
 		
@@ -80,6 +82,7 @@ public class AvisoResource {
 	    @ApiResponse(code = 400, message = "Você enviou algum dado errado"),
 	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 	public ResponseEntity editar(@PathVariable("id") Integer id, @RequestBody @Valid AvisoDto dto) {
 		
@@ -100,6 +103,7 @@ public class AvisoResource {
 	    @ApiResponse(code = 400, message = "Você enviou algum dado errado"),
 	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity deletar(@PathVariable("id") Integer id) {
 		

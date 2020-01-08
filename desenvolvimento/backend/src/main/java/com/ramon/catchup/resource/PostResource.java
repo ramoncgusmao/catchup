@@ -1,5 +1,7 @@
 package com.ramon.catchup.resource;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,7 +36,7 @@ public class PostResource {
 	@Autowired
 	private PostService postService;
 	
-	@ApiOperation(value = "Cria um novo Post")
+	@ApiOperation(value = "Cria um novo Post enviando imagem base64")
 	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity criarPost(@RequestBody @Valid PostDto dto) {
 		
@@ -79,9 +81,10 @@ public class PostResource {
 	
 	}
 	
-	
+	@ApiOperation(value = "Cria um post atravez de uma imagem enviada por multippartfile")
+	@PostMapping(value = "/imagem")
 	 public ResponseEntity uploadFile(
-	            @RequestParam("file") MultipartFile uploadfile) {
+	            @RequestParam("file") MultipartFile uploadfile, @RequestParam("descricao") String descricao) {
 
 	        if (uploadfile.isEmpty()) {
 	            return new ResponseEntity("Você não informou o arquivo", HttpStatus.BAD_REQUEST);
@@ -89,14 +92,13 @@ public class PostResource {
 
 	        try {
 
-	            saveUploadedFiles(Arrays.asList(uploadfile));
-
+	         Post post = postService.converterImagem(uploadfile.getBytes(), descricao);
+	         post = postService.save(post);
+	         return ResponseEntity.ok(post);
 	        } catch (IOException e) {
-	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	        	return ResponseEntity.badRequest().body(e.getMessage());
 	        }
 
-	        return new ResponseEntity("Successfully uploaded - " +
-	                uploadfile.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
 
 	    }
 

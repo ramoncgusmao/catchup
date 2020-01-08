@@ -13,6 +13,7 @@ import com.ramon.catchup.domain.Post;
 import com.ramon.catchup.domain.Usuario;
 import com.ramon.catchup.exception.RegraNegocioException;
 import com.ramon.catchup.repository.PostRepository;
+import com.ramon.catchup.util.ConvertDate;
 
 @Service
 public class PostService {
@@ -64,6 +65,17 @@ public class PostService {
 		}
 		
 		throw new RegraNegocioException("não existe post com esse id");
+	}
+
+
+	public Post converterImagem(byte[] imagem, String descricao) {
+	
+		return Post.builder()
+				.dataCadastro(ConvertDate.localDateNow())
+				.imagem(imagem)
+				.descricao(descricao)
+				.build();
+		
 	}
 	
 
