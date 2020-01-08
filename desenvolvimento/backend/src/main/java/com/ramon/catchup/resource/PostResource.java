@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ramon.catchup.domain.Post;
 import com.ramon.catchup.domain.dto.PostDto;
@@ -77,5 +78,26 @@ public class PostResource {
 		}
 	
 	}
+	
+	
+	 public ResponseEntity uploadFile(
+	            @RequestParam("file") MultipartFile uploadfile) {
+
+	        if (uploadfile.isEmpty()) {
+	            return new ResponseEntity("Você não informou o arquivo", HttpStatus.BAD_REQUEST);
+	        }
+
+	        try {
+
+	            saveUploadedFiles(Arrays.asList(uploadfile));
+
+	        } catch (IOException e) {
+	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	        }
+
+	        return new ResponseEntity("Successfully uploaded - " +
+	                uploadfile.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
+
+	    }
 
 }

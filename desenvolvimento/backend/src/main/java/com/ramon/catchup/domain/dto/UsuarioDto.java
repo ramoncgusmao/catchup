@@ -1,11 +1,7 @@
 package com.ramon.catchup.domain.dto;
 
-import java.util.Arrays;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ramon.catchup.domain.Filial;
 import com.ramon.catchup.domain.Perfil;

@@ -19,6 +19,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ParceriaDto {
 
+	private Integer id;
 	@Min(10)
 	@NotEmpty(message = "precisa da descrição da parceria")
 	private String descricao;

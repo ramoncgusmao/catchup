@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ramon.catchup.domain.Aviso;
-import com.ramon.catchup.domain.Usuario;
 import com.ramon.catchup.exception.DataIntegrityException;
-import com.ramon.catchup.exception.ErroAoSalvar;
 import com.ramon.catchup.exception.RegraNegocioException;
 import com.ramon.catchup.repository.AvisoRepository;
-import com.ramon.catchup.repository.UsuarioRepository;
 
 @Service
 public class AvisoService {

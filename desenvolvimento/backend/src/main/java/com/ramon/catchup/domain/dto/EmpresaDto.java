@@ -13,6 +13,8 @@ import lombok.Getter;
 @Getter
 public class EmpresaDto {
 
+	private Integer id;
+	
 	@Min(5)
 	@Max(100)
 	@NotEmpty(message = "a empresa precisa ter um nome")

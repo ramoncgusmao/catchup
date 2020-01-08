@@ -14,6 +14,8 @@ import lombok.Data;
 @Data
 public class AvisoDto {
 
+	private Integer id;
+	
 	@NotEmpty(message = "O titulo do aviso é obrigatorio")
 	private String titulo;
 

@@ -83,7 +83,7 @@ public class UsuarioRepositoryTest {
 	@Test
 	public void deveRetornarPorEmail() {
 		Usuario usuario = criarUsuario();
-
+		criarCenarioFilialUsuario(usuario);
 
 		Usuario usuarioBuscar = repository.findByEmail("ramoncgusmao@gmail.com");
 		assertThat(usuarioBuscar).isNotNull();

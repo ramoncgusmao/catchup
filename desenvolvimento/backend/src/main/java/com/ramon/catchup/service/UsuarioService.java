@@ -49,7 +49,7 @@ public class UsuarioService {
 		
 	}
 	
-	public Usuario autenticar(String email, String senha) throws DataIntegrityException {
+	public Usuario autenticar(String email) throws DataIntegrityException {
 		Usuario usuario = repository.findByEmail(email);
 		if(usuario != null) {
 			return usuario;
@@ -78,7 +78,7 @@ public class UsuarioService {
 		usuario.addPerfil(Perfil.ADMIN);
 		System.out.println("veio aqui e parou");
 		try {
-			Usuario usuarioopt = autenticar(usuario.getEmail(), usuario.getSenha());
+			Usuario usuarioopt = autenticar(usuario.getEmail());
 			return ("Usuario master ja estava cadastrado - email : admin@admin.com.br   senha: 123admin123");
 		} catch (Exception e) {
 			System.out.println(e + " -- " + e.getMessage());
