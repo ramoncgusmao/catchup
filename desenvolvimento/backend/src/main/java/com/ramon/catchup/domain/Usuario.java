@@ -61,6 +61,7 @@ public class Usuario {
 	@JoinColumn(name = "id_filial", nullable = false)
 	private  Filial filial;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "curtidas")
 	private Set<Post> curtidos = new HashSet<Post>();
 	

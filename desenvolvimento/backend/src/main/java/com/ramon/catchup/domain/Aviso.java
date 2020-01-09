@@ -46,7 +46,6 @@ public class Aviso {
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
 
-	@Lob
 	@Column(name = "imagem", nullable = false, columnDefinition = "TEXT")
 	private byte[] imagem;
 

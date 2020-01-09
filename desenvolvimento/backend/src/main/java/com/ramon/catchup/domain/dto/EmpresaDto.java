@@ -3,6 +3,7 @@ package com.ramon.catchup.domain.dto;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.ramon.catchup.domain.Empresa;
 
@@ -13,22 +14,16 @@ import lombok.Getter;
 @Getter
 public class EmpresaDto {
 
-	private Integer id;
-	
-	@Min(5)
-	@Max(100)
+	@Size(min = 5)
 	@NotEmpty(message = "a empresa precisa ter um nome")
 	private String nome;
-	
-	@Min(9)
+	@Size(min = 8)
 	@NotEmpty(message = "precisa de telefone")
 	private String telefone;
-	
-	@Min(10)
+	@Size(min = 10)
 	@NotEmpty(message = "precisa de cnpj")
 	private String cnpj;
-
-	@Min(10)
+	@Size(min = 10)
 	@NotEmpty(message = "precisa de endereco")
 	private String endereco;
 	

@@ -81,25 +81,6 @@ public class PostResource {
 	
 	}
 	
-	@ApiOperation(value = "Cria um post atravez de uma imagem enviada por multippartfile")
-	@PostMapping(value = "/imagem")
-	 public ResponseEntity uploadFile(
-	            @RequestParam("file") MultipartFile uploadfile, @RequestParam("descricao") String descricao) {
-
-	        if (uploadfile.isEmpty()) {
-	            return new ResponseEntity("Você não informou o arquivo", HttpStatus.BAD_REQUEST);
-	        }
-
-	        try {
-
-	         Post post = postService.converterImagem(uploadfile.getBytes(), descricao);
-	         post = postService.save(post);
-	         return ResponseEntity.ok(post);
-	        } catch (IOException e) {
-	        	return ResponseEntity.badRequest().body(e.getMessage());
-	        }
-
-
-	    }
+	
 
 }

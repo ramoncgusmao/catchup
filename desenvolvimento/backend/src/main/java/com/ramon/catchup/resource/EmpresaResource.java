@@ -52,7 +52,7 @@ public class EmpresaResource {
 	
 	@ApiOperation(value = "Busca uma empresa pelo CNPJ")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@GetMapping(value = "/{cnjp}", produces="application/json")
+	@GetMapping(value = "/{cnpj}", produces="application/json")
 	public ResponseEntity buscarEmpresas(@PathVariable("cnpj") String cnpj) {
 		
 		try {

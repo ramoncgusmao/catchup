@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import com.ramon.catchup.domain.Perfil;
 import com.ramon.catchup.domain.Usuario;
 import com.ramon.catchup.exception.DataIntegrityException;
 import com.ramon.catchup.repository.UsuarioRepository;
+import com.ramon.catchup.security.UserSS;
 
 @Service
 public class UsuarioService {
@@ -87,4 +89,14 @@ public class UsuarioService {
 		}
 		
 	}
+	
+	   public static UserSS authenticated() {
+	        try {
+	            return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	        } catch (Exception e) {
+	            return null;
+	        }
+
+	    }
+
 }

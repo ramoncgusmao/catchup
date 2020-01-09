@@ -19,8 +19,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ParceriaDto {
 
-	private Integer id;
-	@Min(10)
+ 
 	@NotEmpty(message = "precisa da descrição da parceria")
 	private String descricao;
 
@@ -28,7 +27,6 @@ public class ParceriaDto {
 	@NotNull(message = "precisa de uma categoria")
 	private Integer categoria;
 
-	@Min(10)
 	@NotEmpty(message = "precisa do cnpj da parceria")
 	private String cnpj;
 	

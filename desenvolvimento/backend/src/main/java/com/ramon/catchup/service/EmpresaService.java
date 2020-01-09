@@ -21,8 +21,9 @@ public class EmpresaService {
 	}
 	
 	private void validarCnpj(String cnpj) {
-		if(!repository.existsByCnpj(cnpj)){
-			throw new RegraNegocioException("ja existe esse cnpj cadastrado");
+		
+		if(repository.existsByCnpj(cnpj)){
+			throw new RegraNegocioException("ja existe esse cnpj cadastrado" + cnpj);
 		}
 	}
 

@@ -22,12 +22,15 @@ public class ParceriaService {
 	private EmpresaService empresaService;
 
 	@Autowired
+	private UsuarioService usuarioService;
+	@Autowired
 	private CategoriaService categoriaService;
 
 	public Parceria save(Parceria parceria) {
 
 		parceria.setEmpresa(empresaService.findByCnpj(parceria.getEmpresa().getCnpj()));
 		parceria.setCategoria(categoriaService.findById(parceria.getCategoria().getId()));
+		parceria.setUsuario(usuarioService.findById(UsuarioService.authenticated().getId()));
 		if(parceria.getId() == null) {
 			parceria.setStatus(true);
 		}
@@ -71,10 +74,9 @@ public class ParceriaService {
 		if(parceriaFiltro.getCategoria() != null) {
 		parceriaFiltro.setCategoria(categoriaService.findById(parceriaFiltro.getCategoria().getId()));
 		}
-		Example example = Example.of(parceriaFiltro, ExampleMatcher
-				.matching());
+		//Example example = Example.of(parceriaFiltro, ExampleMatcher.matchingAny());
 		
-		return repository.findAll(example);
+		return repository.findAll();
 		
 	}
 

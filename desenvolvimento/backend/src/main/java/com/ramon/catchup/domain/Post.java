@@ -49,12 +49,13 @@ public class Post {
 	@JoinColumn(name = "id_usuario", nullable = false)
 	private Usuario usuario;
 	
-	@Lob
+
 	@Column(name = "imagem", nullable = false, columnDefinition = "TEXT")
 	private byte[] imagem;
 
 
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "curtidas",
 			joinColumns = @JoinColumn(name = "id_post"), 

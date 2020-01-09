@@ -35,14 +35,22 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	
 	private static final String[] PUBLIC_MATCHERS = {
 			
-			"/categoria/**",
+			"/swagger-ui.html",
 			"/aviso/**",
 			"/empresa/**",
 			"/parceria/**",
 			"/usuario/criarUsuarioMasterInicial"
 	};
 	
-	
+	private static final String[] SWAGGER = {
+			
+			"/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+	};
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
@@ -50,6 +58,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS).permitAll()
+			.antMatchers(SWAGGER).permitAll()
 			.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));

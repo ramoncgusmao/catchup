@@ -26,7 +26,7 @@ public class PostService {
 	public Post save(Post post) {
 		
 	
-		post.setUsuario(usuarioService.findById(1));
+		post.setUsuario(usuarioService.findById(UsuarioService.authenticated().getId()));
 		
 		return repository.save(post);
 	}

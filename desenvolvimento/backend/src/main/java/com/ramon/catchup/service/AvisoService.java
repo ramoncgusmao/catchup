@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ramon.catchup.domain.Aviso;
+import com.ramon.catchup.domain.Usuario;
 import com.ramon.catchup.exception.DataIntegrityException;
 import com.ramon.catchup.exception.RegraNegocioException;
 import com.ramon.catchup.repository.AvisoRepository;
@@ -16,14 +17,14 @@ public class AvisoService {
 	@Autowired
 	private AvisoRepository repository;
 
-	@Autowired 
+	@Autowired
 	private UsuarioService usuarioService;
-	
 	public Aviso save(Aviso aviso) throws RegraNegocioException {
 		
 		
 		try {
-			aviso.setUsuario(usuarioService.findById(1));
+			
+			aviso.setUsuario(usuarioService.findById(UsuarioService.authenticated().getId()));
 			return repository.save(aviso);
 		} catch (DataIntegrityException e) {
 			

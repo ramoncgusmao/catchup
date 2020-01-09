@@ -34,12 +34,12 @@ public class AvisoDto {
 			return Aviso.builder()
 					.titulo(titulo)
 					.descricao(descricao)
-					.imagem(Imagem.tratarImagem(imagem, extencao))
+					.imagem(Imagem.converterFotoBase64ToArrayByte(imagem))
 					.dataCadastro(ConvertDate.localDateToDate(LocalDate.now()))
 					.build();
 		} catch (IOException e) {
 			
-			throw new ErroAoSalvar("ocorreu um erro ao converter o Aviso");
+			throw new ErroAoSalvar("ocorreu um erro ao converter o Aviso " + e.getMessage() );
 		}
 	}
 
